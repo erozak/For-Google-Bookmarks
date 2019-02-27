@@ -1,0 +1,53 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-clean-code",
+    "rxjs-tslint-rules",
+    "tslint-plugin-prettier",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules",
+    "tslint-plugin-prettier"
+  ],
+  "rules": {
+    "class-name": true,
+    "curly": true,
+    "newline-before-return": true,
+    "no-arg": true,
+    "no-console": true,
+    "no-constant-condition": true,
+    "no-duplicate-imports": true,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": true,
+    "no-dynamic-delete": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-floating-promises": true,
+    "no-for-in-array": true,
+    "no-implicit-dependnecies": [true, "dev"],
+    "no-inferrable-types": true,
+    "no-invalid-this": true,
+    "no-magic-numbers": true,
+    "no-require-imports": false,
+    "no-return-await": true,
+    "no-shadowed-variable": true,
+    "no-submodule-imports": false,
+    "no-unsafe-finally": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "no-unbound-method": true,
+    "no-unnecessary-initializer": true,
+    "no-unnecessary-type-assertion": true,
+    "no-unnecessary-callback-wrapper": true,
+    "no-unnecessary-class": true,
+    "no-var-keyword": true,
+    "one-variable-per-declaration": true,
+    "no-invalid-template-strings": true,
+    "object-literal-sort-keys": false,
+    "switch-default": true,
+    "variable-name": true,
+    "prettier": true
+  }
+}
