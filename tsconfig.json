@@ -12,7 +12,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "outDir": "build/js",
+    "outDir": "build/src/scripts",
     "resolveJsonModule": true,
     "rootDir": "app",
     "sourceMap": true,

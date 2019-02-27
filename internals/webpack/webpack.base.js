@@ -1,16 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const { fromApp } = require('../utils/path');
+const { OUTPUT_PATH } = require('./constants');
+
 module.exports = {
   entry: {
-    popup: path.resolve(process.cwd(), 'app/popup.ts'),
-    options: path.resolve(process.cwd(), 'app/options.ts'),
-    background: path.resolve(process.cwd(), 'app/background.ts'),
-    content_scripts: path.resolve(process.cwd(), 'app/content.ts'),
+    popup: fromApp('popup.ts'),
+    options: fromApp('options.ts'),
+    background: fromApp('background.ts'),
+    content_scripts: fromApp('content.ts'),
   },
   output: {
-    path: path.resolve(process.cwd(), 'build'),
-    filename: 'js/[name].js',
+    path: OUTPUT_PATH,
+    filename: 'scripts/[name].js',
   },
   optimization: {
     splitChunks: {

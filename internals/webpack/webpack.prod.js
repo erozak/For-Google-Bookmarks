@@ -6,6 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const common = require('./webpack.base');
+const { fromApp, fromRoot } = require('../utils/path');
+const { OUTPUT_PATH } = require('./constants');
 
 const createHTMLWebpackPlugin = (name) => new HTMLWebpackPlugin({
   filename: `${name}.html`,
@@ -22,26 +24,43 @@ const createHTMLWebpackPlugin = (name) => new HTMLWebpackPlugin({
     minifyCSS: true,
     minifyURLs: true,
   },
-  template: path.resolve(process.cwd(), 'app/template.html'),
+  template: fromApp('template.html'),
   inject: true,
 });
 
 
 module.exports = merge(common, {
+  nodeEnv: 'production',
   mode: 'production',
   plugins: [
     createHTMLWebpackPlugin('popup'),
     createHTMLWebpackPlugin('options'),
     new CopyPlugin([
       {
-        from: path.resolve(process.cwd(), 'public'),
-        to: path.resolve(process.cwd(), 'build'),
+        from: fromRoot('public'),
+        to: OUTPUT_PATH,
       }
     ]),
   ],
   optimization: {
     minimizer: [
-      new TerserPlugin(),
+      new TerserPlugin({
+        terserOptions: {
+          warnings: false,
+          compress: {
+            comparisons: false,
+          },
+          parse: {},
+          mangle: true,
+          output: {
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+      }),
     ],
   },
 });

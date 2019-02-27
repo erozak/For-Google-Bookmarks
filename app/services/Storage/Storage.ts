@@ -1,7 +1,5 @@
 import get from 'lodash/get';
-import defaults from 'lodash/defaults';
-import { Many } from 'lodash';
-import { from, Observable, observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
 export type StorageTypes = 'local' | 'sync' | 'managed';
@@ -10,12 +8,14 @@ export interface IStorageConfig<S extends object> {
   defaultState?: S;
 }
 
+type MayBeArray<T> = T | T[];
+
 export class Storage<S extends object> {
   public readonly defaultState: S | {};
 
   constructor(
     public readonly storage: chrome.storage.LocalStorageArea | chrome.storage.SyncStorageArea,
-    config: IStorageConfig,
+    config: IStorageConfig<S>,
   ) {
     this.defaultState = get(config, 'defaultState', {});
   }
@@ -29,11 +29,11 @@ export class Storage<S extends object> {
     });
   }
 
-  public get<R>(keys: Many<string | number>): Observable<R> {
+  public get<R>(keys: MayBeArray<string | number>): Observable<R> {
     return this.getAll().pipe(map(state => {
-      const defaultValue = get(this.defaultState, key);
+      const defaultValue = get(this.defaultState, keys);
 
-      return get(state, key, defaultValue);
+      return get(state, keys, defaultValue);
     }));
   }
 
@@ -50,7 +50,7 @@ export class Storage<S extends object> {
     });
   }
 
-  public remove(keys: Many<string | number>): Observable<void> {
+  public remove(keys: MayBeArray<string>): Observable<void> {
     return new Observable(observable => {
       this.storage.remove(keys, () => {
         observable.next();
@@ -61,7 +61,7 @@ export class Storage<S extends object> {
 
   public clear(): Observable<void> {
     return new Observable(observable => {
-      this.storage.clear(keys, () => {
+      this.storage.clear(() => {
         observable.next();
         observable.complete();
       });
