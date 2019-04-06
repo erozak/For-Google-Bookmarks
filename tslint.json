@@ -28,7 +28,13 @@
     "no-eval": true,
     "no-floating-promises": true,
     "no-for-in-array": true,
-    "no-implicit-dependnecies": [true, "dev"],
+    "no-implicit-dependencies": [
+      true,
+      "dev",
+      [
+        "app"
+      ]
+    ],
     "no-inferrable-types": true,
     "no-invalid-this": true,
     "no-magic-numbers": true,
@@ -46,6 +52,7 @@
     "no-unnecessary-class": true,
     "no-var-keyword": true,
     "one-variable-per-declaration": true,
+    "ordered-imports": false,
     "no-invalid-template-strings": true,
     "object-literal-sort-keys": false,
     "switch-default": true,

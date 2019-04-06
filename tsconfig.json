@@ -25,7 +25,7 @@
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6",
-    "types": ["chrome"]
+    "types": ["chrome", "jest", "node"]
   },
   "exclude": [
     "node_modules",
