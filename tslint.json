@@ -3,6 +3,8 @@
     "tslint:latest",
     "tslint-clean-code",
     "rxjs-tslint-rules",
+    "tslint-react-hooks",
+    "tslint-react",
     "tslint-plugin-prettier",
     "tslint-config-prettier"
   ],
