@@ -1,9 +1,14 @@
+// ts-check
+
 const webpack = require('webpack');
 const path = require('path');
 
 const { fromApp } = require('../utils/path');
 const { OUTPUT_PATH } = require('./constants');
 
+/**
+ * @type {import('webpack').Configuration}
+ */
 module.exports = {
   entry: {
     popup: fromApp('popup.ts'),
@@ -32,5 +37,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
+    modules: ['node_modules', fromApp()],
   },
 };
